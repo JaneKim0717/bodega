@@ -24,32 +24,21 @@ function InventoryManager() {
         setReorderInventory(filterReorder)
     }
 
-
     function handleDelete(event, item) {
         event.stopPropagation()
         fetch(`http://localhost:8001/inventory/${item.id}`, {method: "DELETE"})
-        
-        const newInventory = inventory.filter(inventoryItem => inventoryItem !== item.id)
+
+        const newInventory = inventory.filter(inventoryItem => inventoryItem !== item)
         setInventory(newInventory)
-    
-        const filterReorder = reorderInventory.filter(reorderItem => reorderItem !== item.id)
+
+        const filterReorder = reorderInventory.filter(reorderItem => reorderItem !== item)
         setReorderInventory(filterReorder)
     }
 
-
-
     return(
         <div className="container">
-            <CurrentInventoryList 
-                inventory={inventory} 
-                onAddToReorder={addToReorder}
-                handleDelete={handleDelete}
-            />
-            <ReorderInventoryList 
-                reorderInventory={reorderInventory} 
-                removeFromReorder={removeFromReorder}
-                handleDelete={handleDelete}
-            />
+            <CurrentInventoryList inventory={inventory} onAddToReorder={addToReorder} handleDelete={handleDelete} />
+            <ReorderInventoryList reorderInventory={reorderInventory} onRemoveFromReorder={removeFromReorder} handleDelete={handleDelete} />
         </div>
     );
 }

@@ -1,15 +1,10 @@
 import React from 'react'
 import InventoryItemCard from './InventoryItemCard';
 
-function CurrentInventoryList( { inventory, onAddToReorder, handleDelete }) {
+function CurrentInventoryList({ inventory, onAddToReorder, handleDelete }) {
 
     const renderInventory = inventory.map((item) => {
-        return <InventoryItemCard 
-            key={item.id} 
-            item={item} 
-            callbackFn={onAddToReorder} 
-            handleDelete={handleDelete}
-        />
+        return <InventoryItemCard key={item.id} item={item} callbackFn={onAddToReorder} handleDelete={handleDelete} /> 
     })
 
     return(
